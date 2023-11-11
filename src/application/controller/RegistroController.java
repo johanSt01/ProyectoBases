@@ -3,14 +3,12 @@ package application.controller;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.TextField;
-
 import javax.swing.JOptionPane;
-
 import application.MainApp;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.ComboBox;
-
 import javafx.scene.control.PasswordField;
 
 public class RegistroController {
@@ -32,13 +30,9 @@ public class RegistroController {
 	@FXML
 	private TextField txtTelefono;
 	@FXML
-	private ComboBox comboBoxGrupo;
+	private ComboBox<String> comboBoxGrupo;
 
-	// Event Listener on ComboBox[#comboBoxGrupo].onAction
-	@FXML
-	public void comboBoxGrupo(ActionEvent event) {
-		
-	}
+	private ObservableList<String> listGrupo; 
 	
 	@FXML
 	public void volver(ActionEvent event){
@@ -48,14 +42,22 @@ public class RegistroController {
 	@FXML
 	public void registrar(ActionEvent event){
 		if(camposrellenos()){
-			String correo = txtCorreo.getText();
-			String id = txtNumId.getText();
-			String idAlumnoBuscado = aplicacion.buscarAlumnoId(id);
+			String nombre = this.txtNombre.getText();
+			String apellido = this.txtApellido.getText();
+			String numId = this.txtNumId.getText();
+			String direccion = this.txtDireccion.getText();
+			String telefono = this.txtTelefono.getText();
+			String correo = this.txtCorreo.getText();
+			String pass = this.txtPass.getText();
+			String grupo = this.comboBoxGrupo.getSelectionModel().getSelectedItem();
+			
+			String idAlumnoBuscado = aplicacion.buscarAlumnoId(numId);
 			String correoAlumnoBuscado = aplicacion.buscarAlumnoCorreo(correo);
-			if(idAlumnoBuscado != id && correoAlumnoBuscado != correo){
-				aplicacion.crearAlumno();
+			
+			if(idAlumnoBuscado != numId && correoAlumnoBuscado != correo){
+				aplicacion.crearAlumno(nombre, apellido, numId, direccion, telefono, correo, pass, grupo);
 			}else{
-				JOptionPane.showMessageDialog(null, "El alumno con número de identificación: "+ id +" ya existe en la base de datos");
+				JOptionPane.showMessageDialog(null, "El alumno con número de identificación: "+ numId +" ya existe en la base de datos");
 			}
 		}else{
 			JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos y seleccione un grupo");
@@ -89,5 +91,11 @@ public class RegistroController {
 
 	public void setMainApp(MainApp mainApp) {
 		this.aplicacion = mainApp;
+		
+		// Inicializar listGrupo después de que la aplicación esté completamente inicializada
+        this.listGrupo = FXCollections.observableArrayList(aplicacion.cargarGrupos());
+
+        // Se inicializan los datos del comboBox
+        this.comboBoxGrupo.setItems(listGrupo);
 	}
 }

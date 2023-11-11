@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import application.controller.LoginController;
 import application.controller.ModuleChoiceController;
@@ -8,6 +9,7 @@ import application.controller.RegistroController;
 import application.services.AlumnoService;
 import application.services.DocenteService;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -161,10 +163,11 @@ public class MainApp extends Application {
 		return AlumnoService.buscarAlumnoCorreo(correo);
 	}
 
-	public void crearAlumno() {
-		AlumnoService.crearAlumno();
+	public void crearAlumno(String nombre, String apellido, String numId, String direccion, String telefono, String correo, String pass, String grupo) {
+		AlumnoService.crearAlumno(nombre, apellido, numId, direccion, telefono, correo, pass, grupo);
 	}
-	
-	
 
+	public ObservableList<String> cargarGrupos() {
+		return AlumnoService.obtenerGrupos();
+	}
 }

@@ -50,7 +50,7 @@
             <Label layoutX="363.0" layoutY="175.0" text="direccion" />
             <TextField fx:id="txtTelefono" layoutX="32.0" layoutY="306.0" prefHeight="36.0" prefWidth="292.0" />
             <Label layoutX="32.0" layoutY="268.0" text="Teléfono" />
-            <ComboBox fx:id="comboBoxGrupo" layoutX="367.0" layoutY="308.0" onAction="#comboBoxGrupo" prefHeight="31.0" prefWidth="292.0" />
+            <ComboBox fx:id="comboBoxGrupo" layoutX="367.0" layoutY="308.0" prefHeight="31.0" prefWidth="292.0" />
             <Label layoutX="366.0" layoutY="268.0" text="Grupo" />
          </children>
       </Pane>
