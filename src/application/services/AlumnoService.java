@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import javax.swing.JOptionPane;
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import application.model.Alumno;
@@ -141,7 +139,7 @@ public class AlumnoService {
 
 	public static void crearAlumno(String nombre, String apellido, String numId, String direccion, String telefono,
 			String correo, String pass, String grupo) {
-		Alumno alumnoCreado = null;
+		Alumno alumno = null;
 		MySQLConnector conector = new MySQLConnector();
 		Connection conexion = null;
 		Statement stm = null;
@@ -169,7 +167,7 @@ public class AlumnoService {
 
 			JOptionPane.showMessageDialog(null,"Alumno agregado exitosamente, numero de columnas afectadas: " + pstmt.executeUpdate());
 			
-			alumnoCreado = new Alumno(0,nombre, apellido, numId, direccion, telefono, correo, encriptMD5, id_grupo);
+			alumno = new Alumno(0, nombre, apellido, numId, direccion, telefono, correo, encriptMD5, id_grupo);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

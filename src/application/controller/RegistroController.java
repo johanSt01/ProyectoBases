@@ -86,13 +86,16 @@ public class RegistroController {
 		if(this.txtPass.getText().isEmpty()){
 			return false;
 		}
+		if(comboBoxGrupo.getSelectionModel().getSelectedItem() == null){
+			return false;
+		}
 		return true;
 	}
 
 	public void setMainApp(MainApp mainApp) {
 		this.aplicacion = mainApp;
 		
-		// Inicializar listGrupo después de que la aplicación esté completamente inicializada
+		// Inicializar listGrupo
         this.listGrupo = FXCollections.observableArrayList(aplicacion.cargarGrupos());
 
         // Se inicializan los datos del comboBox

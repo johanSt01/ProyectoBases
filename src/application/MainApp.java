@@ -1,12 +1,13 @@
 package application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import application.controller.CrearExamenController;
 import application.controller.LoginController;
 import application.controller.ModuleChoiceController;
 import application.controller.RegistroController;
 import application.services.AlumnoService;
+import application.services.CrearExamenService;
 import application.services.DocenteService;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -145,6 +146,29 @@ public class MainApp extends Application {
     		e.printStackTrace();
     	}
 	}
+	
+	public void showCrearExamen(){
+		try{
+			// Carga del fxml de eleccion de modulo.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/CrearExamen.fxml"));
+	        AnchorPane moduleChoice = (AnchorPane) loader.load();
+	        
+	        // Set person overview into the center of root layout.
+	
+	        primaryStage.setMinHeight(650);
+	        primaryStage.setMinWidth(750);
+	        primaryStage.setMaxHeight(600);
+	        primaryStage.setMaxWidth(750);
+	        rootLayout.setCenter(moduleChoice);
+	
+	        // Give the controller access to the main app.
+	        CrearExamenController controller = loader.getController();
+	        controller.setMainApp(this);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+	}
 
 
 	public boolean ingresarAlumno(String correo, String password) {
@@ -169,5 +193,30 @@ public class MainApp extends Application {
 
 	public ObservableList<String> cargarGrupos() {
 		return AlumnoService.obtenerGrupos();
+	}
+
+	public void crearExamen(String nombre, String descripcion, String alumno, String docente, String temaExamen,
+			String categoria, int configuracion) {
+		CrearExamenService.crearExamen(nombre, descripcion, alumno, docente, temaExamen, categoria, configuracion);	
+	}
+
+	public ObservableList<String> cargarTemasExamen() {
+		return CrearExamenService.obtenerTemasExamen();
+	}
+
+	public ObservableList<String> cargarCategorias() {
+		return CrearExamenService.obtenerCategorias();
+	}
+
+	public ObservableList<String> cargarDocente() {
+		return CrearExamenService.obtenerDocentes();
+	}
+
+	public ObservableList<String> cargarAlumno() {
+		return CrearExamenService.obtenerAlumnos();
+	}
+
+	public ObservableList<Integer> cargarConfiguraciones() {
+		return CrearExamenService.obtenerConfiguraciones();
 	}
 }

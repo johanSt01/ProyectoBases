@@ -197,16 +197,16 @@ insert into Curso (id, nombre, planEstudio) values (3, 'Negocios y Administraci�
 insert into Curso (id, nombre, planEstudio) values (4, 'Ingeniería', 'Disciplina que combina la teoría científica con la aplicación práctica para diseñar y construir soluciones');
 insert into Curso (id, nombre, planEstudio) values (5, 'Artes', 'Analiza la evolución del arte a lo largo de la historia y sus movimientos');
 
-insert into Grupo (id, nombre, numGrupo, id_curso) values (1, 'Nombre', 2, 1);
-insert into Grupo (id, nombre, numGrupo, id_curso) values (2, 'Nombre', 1, 4);
+insert into Grupo (id, nombre, numGrupo, id_curso) values (1, 'Investigacion', 2, 1);
+insert into Grupo (id, nombre, numGrupo, id_curso) values (2, 'Programacion', 1, 4);
 
-insert into Docente (id, nombre, apellido, cedula, telefono, correo, password) values (1, 'Lindy', 'Charles', '98-901-1402', '+374 (276) 802-0407', 'lcharles0@nasa.gov', '1');
-insert into Docente (id, nombre, apellido, cedula, telefono, correo, password) values (2, 'Eben', 'Rochelle', '48-686-2551', '+48 (271) 149-1554', 'erochelle1@guardian.co.uk', '2');
-insert into Docente (id, nombre, apellido, cedula, telefono, correo, password) values (3, 'Cullen', 'Cutchie', '63-114-9654', '+86 (174) 951-8200', 'ccutchie2@nasa.gov', '3');
+insert into Docente (id, nombre, apellido, cedula, telefono, correo, password) values (1, 'Lindy', 'Charles', '98-901-1402', '+374 (276) 802-0407', 'lcharles0@nasa.gov', 'c4ca4238a0b923820dcc509a6f75849b');
+insert into Docente (id, nombre, apellido, cedula, telefono, correo, password) values (2, 'Eben', 'Rochelle', '48-686-2551', '+48 (271) 149-1554', 'erochelle1@guardian.co.uk', 'c81e728d9d4c2f636f067f89cc14862c');
+insert into Docente (id, nombre, apellido, cedula, telefono, correo, password) values (3, 'Cullen', 'Cutchie', '63-114-9654', '+86 (174) 951-8200', 'ccutchie2@nasa.gov', 'eccbc87e4b5ce2fe28308fd9f2a7baf3');
 
-insert into Alumno (id, nombre, apellido, numIdentificacion, direccion, telefono, correo, password, id_grupo) values (1, 'Sylvia', 'Heddy', '88-753-0263', 'PO Box 59741', '+86 (850) 762-1176', 'sheddy0@reddit.com', '1', 1);
-insert into Alumno (id, nombre, apellido, numIdentificacion, direccion, telefono, correo, password, id_grupo) values (2, 'Clarence', 'Fildes', '55-103-6490', 'PO Box 91049', '+86 (213) 436-6313', 'cfildes1@amazon.co.jp', '2', 1);
-insert into Alumno (id, nombre, apellido, numIdentificacion, direccion, telefono, correo, password, id_grupo) values (3, 'Bethanne', 'Blackler', '03-229-9286', 'Suite 21', '+241 (675) 701-6056', 'bblackler2@nba.com', '3', 2);
+insert into Alumno (id, nombre, apellido, numIdentificacion, direccion, telefono, correo, password, id_grupo) values (1, 'Sylvia', 'Heddy', '88-753-0263', 'PO Box 59741', '+86 (850) 762-1176', 'sheddy0@reddit.com', 'c4ca4238a0b923820dcc509a6f75849b', 1);
+insert into Alumno (id, nombre, apellido, numIdentificacion, direccion, telefono, correo, password, id_grupo) values (2, 'Clarence', 'Fildes', '55-103-6490', 'PO Box 91049', '+86 (213) 436-6313', 'cfildes1@amazon.co.jp', 'c81e728d9d4c2f636f067f89cc14862c', 1);
+insert into Alumno (id, nombre, apellido, numIdentificacion, direccion, telefono, correo, password, id_grupo) values (3, 'Bethanne', 'Blackler', '03-229-9286', 'Suite 21', '+241 (675) 701-6056', 'bblackler2@nba.com', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 2);
 
 insert into TemaExamen (id, descripcion) values (1, 'Derivadas');
 insert into TemaExamen (id, descripcion) values (2, 'Integrales');

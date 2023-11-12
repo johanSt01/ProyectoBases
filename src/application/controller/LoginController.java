@@ -45,8 +45,7 @@ public class LoginController {
 			}
     		if (this.usuario.equals("doc")) {
     			if (aplicacion.ingresarDocente(correo, password)) {
-    			//	int id_desarrollador = aplicacion.buscarDesarrolladorEmail(correo);
-    			//	aplicacion.showModuleChoice("Docente", correo, id_desarrollador);
+    				aplicacion.showCrearExamen();
 				}else{
 					JOptionPane.showMessageDialog(null, "Docente no encontrado o contraseña invalida");
 				}
