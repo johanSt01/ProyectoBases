@@ -57,9 +57,23 @@ public class RespuestaExamenController {
 	@FXML
 	private RadioButton RbFalsoPre4;
 
+	private int sumaNota = 0;
+	
 	@FXML
 	void Enviar(ActionEvent event) {
-
+		String nombreAlumno = this.txtNombreExamen.getText();
+		
+		if(this.opcionAPre1.isSelected() && !this.opcionBPre1.isSelected() && !this.opcionCPre1.isSelected()){
+			sumaNota = +1;
+		}if(this.opcionAPre2.isSelected() && !this.opcionBPre2.isSelected() && !this.opcionCPre2.isSelected()){
+			sumaNota = +2;
+		}if(this.RbVerdaderoPre3.isSelected() && !this.RbFalsoPre3.isSelected()){
+			sumaNota = +1;
+		}if(this.RbFalsoPre4.isSelected() && !this.RbVerdaderoPre4.isSelected()){
+			sumaNota = +1;
+		}
+		
+		aplicacion.enviarNota(sumaNota, nombreAlumno);
 	}
 
 	@FXML

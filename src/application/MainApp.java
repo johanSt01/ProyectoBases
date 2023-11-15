@@ -12,6 +12,8 @@ import application.controller.RespuestaExamenController;
 import application.services.AlumnoService;
 import application.services.CrearExamenService;
 import application.services.DocenteService;
+import application.services.EmailService;
+import application.services.EnviarNotaService;
 import application.services.ListarExamenesService;
 import application.services.ResponderExamenService;
 import javafx.application.Application;
@@ -22,7 +24,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class MainApp extends Application {
 
@@ -290,6 +291,10 @@ public class MainApp extends Application {
 
 	public ArrayList<String> obtenerRespuestasPregunta2(String pregunta2) {
 		return ResponderExamenService.obtenerRespuestasPregunta2(pregunta2);
+	}
+
+	public void enviarNota(int sumaNota, String nombreAlumno) {
+		EnviarNotaService.enviarNota(sumaNota, nombreAlumno);		
 	}
 
 }
