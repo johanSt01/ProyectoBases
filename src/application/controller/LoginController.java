@@ -38,7 +38,7 @@ public class LoginController {
     		String password = txtPassword.getText();
     		if (this.usuario.equals("alu")) {
     			if (aplicacion.ingresarAlumno(correo, password)) {
-    				aplicacion.showModuleChoice("Alumno", correo, 0);
+    				aplicacion.showListaExamenes(correo);
 				}else{
 					JOptionPane.showMessageDialog(null, "Alumno no encontrado o contraseña invalida");
 				}
@@ -73,7 +73,7 @@ public class LoginController {
     @FXML
     void cambiarRolEstudiante(ActionEvent event) {
     	splitRol.setText("Alumno");
-    	this.usuario = "est";
+    	this.usuario = "alu";
     }
 
     @FXML

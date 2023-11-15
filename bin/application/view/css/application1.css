@@ -15,8 +15,7 @@ Label {
 
 TextField {
 	-fx-background-color: #4A4C4D;
-         -fx-border-color: #FFFFFF;
-         -fx-border-width: 2;
+         -fx-border-width: 1;
          -fx-text-fill: #FFFFFF;
          -fx-font-family: "Times New Roman";
          -fx-font-style: italic;
@@ -74,18 +73,11 @@ Button:pressed { -fx-background-color: #FFFFFF;
 	-fx-text-fill: #000000;
 	-fx-font-weight: bold;
 }
-.combo-box .list-cell:filled:selected {
-    -fx-text-fill: #FFFFFF; /* Cambia el color del texto seleccionado según tus preferencias */
-}
-
-ComboBox {
-    -fx-background-color: #4A4C4D;
-    -fx-border-color: #FFFFFF;
-    -fx-border-width: 2;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: "Times New Roman";
-    -fx-font-style: italic;
-    -fx-font-size: 18px;
-    -fx-background-radius: 10 10 10 10;
-    -fx-border-radius: 10 10 10 10;
+RadioButton {
+	-fx-background-color: #FFFFFF;
+         -fx-border-width: 2;
+         -fx-text-fill: #000000;
+         -fx-font-family: "Times New Roman";
+         -fx-font-style: italic;
+         -fx-font-size: 18px;
 }

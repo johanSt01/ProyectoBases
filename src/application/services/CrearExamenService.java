@@ -24,11 +24,11 @@ public class CrearExamenService {
 		int id_categoria = obtenerCodigoCat(categoria);
 		int id_docente = obtenerCodigoDocente(docente);
 		int id_alumno = obtenerCodigoAlumno(alumno);
-		
+
 		try {
 			conexion = conector.conectar();
 			stm = conexion.createStatement();
-			String query = "INSERT INTO Alumno (id, nombre, descripcion, id_tema_examen, id_categoria, id_docente, id_alumno, id_configuracion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO Examen (id, nombre, descripcion, id_tema_examen, id_categoria, id_docente, id_alumno, id_configuracion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement pstmt = conexion.prepareStatement(query);
 
@@ -40,10 +40,15 @@ public class CrearExamenService {
 			pstmt.setInt(6, id_docente);
 			pstmt.setInt(7, id_alumno);
 			pstmt.setInt(8, id_configuracion);
-			
-			JOptionPane.showMessageDialog(null,"Examen agregado exitosamente, numero de columnas afectadas: " + pstmt.executeUpdate());
-			
-			examenCreado = new Examen(0, nombre, descripcion, id_tema_examen, id_categoria, id_docente, id_alumno, id_configuracion);
+
+	        JOptionPane.showMessageDialog(null,
+	                "Examen agregado exitosamente, numero de columnas afectadas: " + pstmt.executeUpdate());
+
+	        examenCreado = new Examen(0, nombre, descripcion, id_tema_examen, id_categoria, id_docente,
+	                id_alumno, id_configuracion);
+
+	        int idExamen = obtenerIdExamen(nombre);//se utiliza para obtener el examen que se acaba de crear
+	        asociarPreguntasExamen(temaExamen, idExamen);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,6 +71,102 @@ public class CrearExamenService {
 			}
 		}
 	}
+
+	private static void asociarPreguntasExamen(String categoria, int idExamen) { 
+	    MySQLConnector conector = new MySQLConnector();
+	    Connection conexion = null;
+	    PreparedStatement pstmt = null;
+
+	    int[] idPreguntas = null;
+
+	    if (categoria.equals("Derivadas")) {
+	        idPreguntas = new int[]{1, 2, 3, 4};
+	    }if (categoria.equals("Integrales")) {
+	        idPreguntas = new int[]{5, 6, 7, 8};
+	    }if (categoria.equals("Bases de datos")) {
+	        idPreguntas = new int[]{9, 10, 11, 12};
+	    }
+
+	    try {
+	        conexion = conector.conectar();
+	        conexion.setAutoCommit(false); // Desactivar autocommit
+
+	        String query = "INSERT INTO PreguntasExamen (id_pregunta, id_examen) VALUES (?, ?)";
+	        pstmt = conexion.prepareStatement(query);
+
+	        for (int idPregunta : idPreguntas) {
+	            pstmt.setInt(1, idPregunta);
+	            pstmt.setInt(2, idExamen);
+	            pstmt.addBatch();
+	        }
+
+	        int[] filasAfectadas = pstmt.executeBatch();
+	        conexion.commit(); // Realizar commit explícito
+	        JOptionPane.showMessageDialog(null,
+	                "Preguntas agregadas exitosamente, número de filas afectadas: " + filasAfectadas.length);
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        try {
+	            if (conexion != null) {
+	                conexion.rollback(); // Realizar rollback en caso de error
+	            }
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    } finally {
+	        try {
+	            if (pstmt != null) {
+	                pstmt.close();
+	            }
+	            if (conexion != null) {
+	                conexion.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
+	private static int obtenerIdExamen(String nombre) {
+		int id_examen = 0;
+		MySQLConnector conector = new MySQLConnector();
+		Connection conexion = null;
+		Statement stm = null;
+		ResultSet rset = null;
+
+		try {
+			conexion = conector.conectar();
+			stm = conexion.createStatement();
+			rset = stm.executeQuery("SELECT id FROM Examen E WHERE E.nombre = '" + nombre + "'");
+
+			if (rset.next() == true) {
+				id_examen = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (rset != null) {
+					rset.close();
+				}
+				if (stm != null) {
+					stm.close();
+				}
+				if (conexion != null) {
+					conexion.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return id_examen;
+	}
+
 
 	private static int obtenerCodigoAlumno(String alumno) {
 		int id_alumno = 0;
@@ -235,7 +336,7 @@ public class CrearExamenService {
 			stm = conexion.createStatement();
 			rset = stm.executeQuery("SELECT descripcion FROM TemaExamen");
 
-			//Recorrer todos los datos obtenidos de la sentencia SQL
+			// Recorrer todos los datos obtenidos de la sentencia SQL
 			while (rset.next()) {
 				String descripcionesTemas = rset.getString(1);
 
@@ -276,7 +377,7 @@ public class CrearExamenService {
 			stm = conexion.createStatement();
 			rset = stm.executeQuery("SELECT descripcion FROM Categoria");
 
-			//Recorrer todos los datos obtenidos de la sentencia SQL
+			// Recorrer todos los datos obtenidos de la sentencia SQL
 			while (rset.next()) {
 				String descripcionesCat = rset.getString(1);
 
@@ -317,7 +418,7 @@ public class CrearExamenService {
 			stm = conexion.createStatement();
 			rset = stm.executeQuery("SELECT nombre FROM Docente");
 
-			//Recorrer todos los datos obtenidos de la sentencia SQL
+			// Recorrer todos los datos obtenidos de la sentencia SQL
 			while (rset.next()) {
 				String nombresDocentes = rset.getString(1);
 
@@ -358,7 +459,7 @@ public class CrearExamenService {
 			stm = conexion.createStatement();
 			rset = stm.executeQuery("SELECT nombre FROM Alumno");
 
-			//Recorrer todos los datos obtenidos de la sentencia SQL
+			// Recorrer todos los datos obtenidos de la sentencia SQL
 			while (rset.next()) {
 				String nombresAlumnos = rset.getString(1);
 
@@ -399,9 +500,9 @@ public class CrearExamenService {
 			stm = conexion.createStatement();
 			rset = stm.executeQuery("SELECT id FROM Configuracion");
 
-			//Recorrer todos los datos obtenidos de la sentencia SQL
+			// Recorrer todos los datos obtenidos de la sentencia SQL
 			while (rset.next()) {
-				int idConfig  = rset.getInt(1);
+				int idConfig = rset.getInt(1);
 
 				configuraciones.add(idConfig);
 			}

@@ -1,14 +1,19 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import application.controller.CrearExamenController;
+import application.controller.ListaExamenesController;
 import application.controller.LoginController;
 import application.controller.ModuleChoiceController;
 import application.controller.RegistroController;
+import application.controller.RespuestaExamenController;
 import application.services.AlumnoService;
 import application.services.CrearExamenService;
 import application.services.DocenteService;
+import application.services.ListarExamenesService;
+import application.services.ResponderExamenService;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class MainApp extends Application {
 
@@ -169,6 +175,52 @@ public class MainApp extends Application {
     		e.printStackTrace();
     	}
 	}
+	
+	public void showResponderExamen(String examenElegido) {
+		try{
+			// Carga del fxml de eleccion de modulo.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/RespuestaExamen.fxml"));
+	        AnchorPane moduleChoice = (AnchorPane) loader.load();
+	        
+	        // Set person overview into the center of root layout.
+	
+	        primaryStage.setMinHeight(830);
+	        primaryStage.setMinWidth(750);
+	        primaryStage.setMaxHeight(830);
+	        primaryStage.setMaxWidth(750);
+	        rootLayout.setCenter(moduleChoice);
+	
+	        // Give the controller access to the main app.
+	        RespuestaExamenController controller = loader.getController();
+	        controller.setMainApp(this, examenElegido);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}		
+	}
+	
+	public void showListaExamenes(String correo) {
+		try{
+			// Carga del fxml de eleccion de modulo.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/ListaExamenes.fxml"));
+	        AnchorPane moduleChoice = (AnchorPane) loader.load();
+	        
+	        // Set person overview into the center of root layout.
+	
+	        primaryStage.setMinHeight(400);
+	        primaryStage.setMinWidth(750);
+	        primaryStage.setMaxHeight(400);
+	        primaryStage.setMaxWidth(750);
+	        rootLayout.setCenter(moduleChoice);
+	
+	        // Give the controller access to the main app.
+	        ListaExamenesController controller = loader.getController();
+	        controller.setMainApp(this, correo);
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}		
+	}
 
 
 	public boolean ingresarAlumno(String correo, String password) {
@@ -219,4 +271,25 @@ public class MainApp extends Application {
 	public ObservableList<Integer> cargarConfiguraciones() {
 		return CrearExamenService.obtenerConfiguraciones();
 	}
+
+	public ArrayList<String> obtenerPreguntasExamen(String examenElegido) {
+		return ResponderExamenService.obtenerPreguntasExamen(examenElegido);
+	}
+
+	public String obtenerNombreAlumno(String correo) {
+		return ListarExamenesService.obtenerNombreAlumno(correo);
+	}
+
+	public ObservableList<String> cargarExamenesAlumno(String correo) {
+		return ListarExamenesService.obtenerExamenesAlumno(correo);
+	}
+
+	public ArrayList<String> obtenerRespuestasPregunta1(String pregunta1) {
+		return ResponderExamenService.obtenerRespuestasPregunta1(pregunta1);
+	}
+
+	public ArrayList<String> obtenerRespuestasPregunta2(String pregunta2) {
+		return ResponderExamenService.obtenerRespuestasPregunta2(pregunta2);
+	}
+
 }

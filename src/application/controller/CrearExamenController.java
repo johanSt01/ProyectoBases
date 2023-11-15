@@ -90,7 +90,7 @@ public class CrearExamenController {
 	public void setMainApp(MainApp mainApp) {
 		this.aplicacion = mainApp;
 		
-		// Inicializar listGrupo
+		// Inicializar listas
         this.listTemaExamen = FXCollections.observableArrayList(aplicacion.cargarTemasExamen());
         this.listCategoria = FXCollections.observableArrayList(aplicacion.cargarCategorias());
         this.listDocente = FXCollections.observableArrayList(aplicacion.cargarDocente());
