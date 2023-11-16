@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 public class EmailService {
 	public static void enviarEmail(String emailDestino, String asunto, String cuerpo){
 		//La dirección de correo de envío
-	    String remitente = "soportecamu@gmail.com";
+	    String remitente = "institucion278@gmail.com"; //institucion.1
 	    //La clave de aplicación obtenida
-	    String claveemail = "gfdtlfdfmgvpwraq";
+	    String claveemail = "irps ztyk mjjp mfng";
 
 	    Properties props = System.getProperties();
 	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
@@ -33,7 +33,7 @@ public class EmailService {
 	        transport.sendMessage(message, message.getAllRecipients());
 	        transport.close();
 
-	        JOptionPane.showMessageDialog(null, "Se ha enviado una notificacion de estado de soporte al usuario con email: "+emailDestino);
+	        JOptionPane.showMessageDialog(null, "Se ha enviado una notificacion de nota al usuario con email: "+emailDestino);
 	    }
 	    catch (MessagingException me) {
 	        me.printStackTrace();   //Si se produce un error

@@ -56,6 +56,7 @@ public class RegistroController {
 			
 			if(idAlumnoBuscado != numId && correoAlumnoBuscado != correo){
 				aplicacion.crearAlumno(nombre, apellido, numId, direccion, telefono, correo, pass, grupo);
+				aplicacion.showLogin();
 			}else{
 				JOptionPane.showMessageDialog(null, "El alumno con número de identificación: "+ numId +" ya existe en la base de datos");
 			}

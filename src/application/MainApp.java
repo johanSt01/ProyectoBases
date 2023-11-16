@@ -177,7 +177,7 @@ public class MainApp extends Application {
     	}
 	}
 	
-	public void showResponderExamen(String examenElegido) {
+	public void showResponderExamen(String examenElegido, String correoAlumno) {
 		try{
 			// Carga del fxml de eleccion de modulo.
 	        FXMLLoader loader = new FXMLLoader();
@@ -194,7 +194,7 @@ public class MainApp extends Application {
 	
 	        // Give the controller access to the main app.
 	        RespuestaExamenController controller = loader.getController();
-	        controller.setMainApp(this, examenElegido);
+	        controller.setMainApp(this, examenElegido, correoAlumno);
     	} catch (IOException e) {
     		e.printStackTrace();
     	}		
@@ -293,8 +293,8 @@ public class MainApp extends Application {
 		return ResponderExamenService.obtenerRespuestasPregunta2(pregunta2);
 	}
 
-	public void enviarNota(int sumaNota, String nombreAlumno) {
-		EnviarNotaService.enviarNota(sumaNota, nombreAlumno);		
+	public void enviarNota(int sumaNota, String correoAlumno) {
+		EnviarNotaService.enviarNota(sumaNota, correoAlumno);		
 	}
 
 }

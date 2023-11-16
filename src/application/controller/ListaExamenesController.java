@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 
 public class ListaExamenesController {
 	private MainApp aplicacion;
+	private String correoAlumno;
 	
 	@FXML
 	private TextField txtNombreAlumno;
@@ -33,7 +34,7 @@ public class ListaExamenesController {
 		if(camposrellenos()){
 			String examenElegido = comboBoxNombresExamenes.getSelectionModel().getSelectedItem();
 			
-			aplicacion.showResponderExamen(examenElegido);
+			aplicacion.showResponderExamen(examenElegido, correoAlumno);
 		}
 	}
 	// Event Listener on Button.onAction
@@ -51,6 +52,7 @@ public class ListaExamenesController {
 	
 	public void setMainApp(MainApp mainApp, String correo) {
 		this.aplicacion = mainApp;
+		this.correoAlumno = correo;
 		
 		//buscamos el nombre en la base de datos con el correo
 		String nombreAlumno = aplicacion.obtenerNombreAlumno(correo);

@@ -75,7 +75,7 @@ CREATE TABLE `Alumno` (
     `nombre` VARCHAR(50) NOT NULL,
     `apellido` VARCHAR(50) NOT NULL,
     `numIdentificacion` VARCHAR(20) NOT NULL,
-    `direccion` VARCHAR(20) NOT NULL,
+    `direccion` VARCHAR(50) NOT NULL,
     `telefono` VARCHAR(20) NOT NULL,
     `correo` VARCHAR(50) NOT NULL,
     `password` VARCHAR(100) NOT NULL,

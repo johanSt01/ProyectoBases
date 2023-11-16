@@ -1,4 +1,4 @@
-package application.controller;
+	package application.controller;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 public class RespuestaExamenController {
 
 	private MainApp aplicacion;
+	private String correoAlumno;
 
 	@FXML
 	private RadioButton opcionAPre1;
@@ -61,7 +62,6 @@ public class RespuestaExamenController {
 	
 	@FXML
 	void Enviar(ActionEvent event) {
-		String nombreAlumno = this.txtNombreExamen.getText();
 		
 		if(this.opcionAPre1.isSelected() && !this.opcionBPre1.isSelected() && !this.opcionCPre1.isSelected()){
 			sumaNota = +1;
@@ -73,7 +73,7 @@ public class RespuestaExamenController {
 			sumaNota = +1;
 		}
 		
-		aplicacion.enviarNota(sumaNota, nombreAlumno);
+		aplicacion.enviarNota(sumaNota, correoAlumno);
 	}
 
 	@FXML
@@ -81,8 +81,10 @@ public class RespuestaExamenController {
 		aplicacion.showModuleChoice(null, null, 0);
 	}
 
-	public void setMainApp(MainApp mainApp, String examenElegido) {
+	public void setMainApp(MainApp mainApp, String examenElegido, String correo) {
 		this.aplicacion = mainApp;
+		
+		this.correoAlumno = correo;
 
 		ArrayList<String> preguntasExamen = aplicacion.obtenerPreguntasExamen(examenElegido);
 
